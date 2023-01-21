@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "gRPCServer";
+option csharp_namespace = "gRPCClient";
 
 package greet;
 

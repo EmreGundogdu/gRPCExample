@@ -1,13 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Grpc.Net.Client;
-using gRPCServer;
+using gRPCClient;
+using gRPCMessageClient;
 
 Console.WriteLine("Hello, World!");
 
 var channel = GrpcChannel.ForAddress("https://localhost:7242");
-var greetClient = new Greeter.GreeterClient(channel);
-HelloReply helloReply = greetClient.SayHello(new()
+//var greetClient = new Greeter.GreeterClient(channel);
+//HelloReply helloReply = greetClient.SayHello(new()
+//{
+//    Name = "Hallo leute wie geht es euch?"
+//});
+
+var messageClient = new Message.MessageClient(channel);
+var result = messageClient.SendMessage(new MessageRequest
 {
-    Name = "Hallo leute wie geht es euch?"
+    Message = "Hallo",
+    Name = "Emre"
 });
-Console.WriteLine(helloReply);
+Console.WriteLine(result.Message);
