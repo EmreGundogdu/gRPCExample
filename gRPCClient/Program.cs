@@ -2,20 +2,53 @@
 using Grpc.Net.Client;
 using gRPCClient;
 using gRPCMessageClient;
+using gRPCStreamMessageClient;
+using gRPCStreamRequestMessageClient;
 
 Console.WriteLine("Hello, World!");
 
 var channel = GrpcChannel.ForAddress("https://localhost:7242");
+#region Unary 
 //var greetClient = new Greeter.GreeterClient(channel);
 //HelloReply helloReply = greetClient.SayHello(new()
 //{
 //    Name = "Hallo leute wie geht es euch?"
 //});
 
-var messageClient = new Message.MessageClient(channel);
-var result = messageClient.SendMessage(new MessageRequest
+//var messageClient = new Message.MessageClient(channel);
+//var result = messageClient.SendMessage(new MessageRequest
+//{
+//    Message = "Hallo",
+//    Name = "Emre"
+//});
+#endregion
+
+#region Server Streaming
+//var streammessageClient = new StreamMessage.StreamMessageClient(channel);
+//var response = streammessageClient.SendStreamMessage(new StreamMessageRequest
+//{
+//    Message = "Merhaba",
+//    Name = "Emre"
+//});
+//CancellationTokenSource cancellationToken = new();
+//while (await response.ResponseStream.MoveNext(cancellationToken.Token))
+//{
+//    Console.WriteLine(response.ResponseStream.Current.Message);
+//}
+#endregion
+
+#region Client Streaming
+var streamRequestmessageClient = new StreamRequestMessage.StreamRequestMessageClient(channel);
+var request = streamRequestmessageClient.SendStreamMessage();
+for (int i = 0; i < 10; i++)
 {
-    Message = "Hallo",
-    Name = "Emre"
-});
-Console.WriteLine(result.Message);
+   await Task.Delay(2000);
+   await request.RequestStream.WriteAsync(new StreamRequestMessageRequest
+    {
+        Name = "Emre",
+        Message = "mesaj" + i
+    });
+}
+await request.RequestStream.CompleteAsync();//giden stream requestin bittiğini söylemiş oluyoruz
+Console.WriteLine((await request.ResponseAsync).Message);
+#endregion

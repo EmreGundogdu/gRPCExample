@@ -9,11 +9,15 @@
 
   <ItemGroup>
     <None Remove="protos\message.proto" />
+    <None Remove="protos\streamMessage.proto" />
+    <None Remove="protos\streamRequestMessage.proto" />
   </ItemGroup>
 
 	<ItemGroup>
 		<Protobuf Include="protos\greet.proto" GrpcServices="Client" />
 		<Protobuf Include="protos\message.proto" GrpcServices="Client" />
+		<Protobuf Include="protos\streamMessage.proto" GrpcServices="Client" />
+		<Protobuf Include="protos\streamRequestMessage.proto" GrpcServices="Client" />
 	</ItemGroup>
 	
   <ItemGroup>
