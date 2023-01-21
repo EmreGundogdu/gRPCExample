@@ -11,6 +11,7 @@
     <Protobuf Include="Protos\message.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\streamMessage.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\streamRequestMessage.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\biDirectionalStreamMessage.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

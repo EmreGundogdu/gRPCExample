@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="protos\biDirectionalStreamMessage.proto" />
     <None Remove="protos\message.proto" />
     <None Remove="protos\streamMessage.proto" />
     <None Remove="protos\streamRequestMessage.proto" />
   </ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="protos\biDirectionalStreamMessage.proto" GrpcServices="Client" />
 		<Protobuf Include="protos\greet.proto" GrpcServices="Client" />
 		<Protobuf Include="protos\message.proto" GrpcServices="Client" />
 		<Protobuf Include="protos\streamMessage.proto" GrpcServices="Client" />
